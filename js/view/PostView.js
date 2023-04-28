@@ -15,7 +15,7 @@ export default class PostView {
                     <p class="card-text">
                         ${this.postModel.description}
                     </p>
-                    <a href="#" class="btn btn-primary">Read more &rarr;</a>
+                    <a href="./pages/showPost.html" onclick="ShowPost(${this.postModel.id})" class="btn btn-primary">Read more &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted by <a href="#">${this.postModel.author}</a> on ${this.postModel.postDate}

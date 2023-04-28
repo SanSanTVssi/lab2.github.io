@@ -1,24 +1,24 @@
 import PostView from './PostView.js';
 
 export default class PostsListView {
-    constructor(postListModel, usersModel) {
-        this.postListModel = postListModel;
-        this.usersModel = usersModel
+    constructor(container) {
+        this.postListModel = container.GetInstance("postListModel");
+        this.customerModel = container.GetInstance("customerModel");
         this.controllerOnAddItem = null;
         this.controllerOnDelItem = null;
 
-        document.querySelector('#posts')?.addEventListener('click', (e) => this.onClick(e));
+        document.querySelector('#posts')?.addEventListener('click', (e) => this._onClick(e));
     }
 
-    setControllerOnAddItem(controllerOnAddItem) {
+    SetControllerOnAddItem(controllerOnAddItem) {
         this.controllerOnAddItem = controllerOnAddItem;
     }
 
-    setControllerOnDelItem(controllerOnDelItem) {
+    SetControllerOnDelItem(controllerOnDelItem) {
         this.controllerOnDelItem = controllerOnDelItem;
     }
 
-    onClick(e) {
+    _onClick(e) {
         if (e.target.className === 'del-button') {
             this.controllerOnDelItem(e.target.dataset.id);
         }
@@ -28,8 +28,8 @@ export default class PostsListView {
         e.preventDefault()
 
         console.log(this)
-        let user = this.usersModel.currentUser
-        let author = user.firstName + " " + user.lastName
+        let user = this.customerModel.currentCustomer
+        let author = user.gptName + " " + user.gptFamily
 
         const img = document.querySelector('#post-image')?.value
         const title = document.querySelector('#post-title')?.value

@@ -1,15 +1,15 @@
 import {Post} from "../model/Post.js";
 
 export default class PostController {
-    constructor(postListModel, postListView) {
-        this.postListModel = postListModel;
-        this.postListView = postListView;
+    constructor(container) {
+        this.postListModel = container.GetInstance("postListModel");
+        this.postListView = container.GetInstance("postListView");
 
-        this.postListModel.setOnChangeCallback((e) => this.onChangeCallback(e));
-        this.postListView.setControllerOnAddItem(this.addItem);
-        this.postListView.setControllerOnDelItem(this.delItem);
+        this.postListModel.onChangeCallback = (e) => this.onChangeCallback(e);
+        this.postListView.SetControllerOnAddItem(this._appendPost);
+        this.postListView.SetControllerOnDelItem(this._removePost);
 
-        document.querySelector('#add-post')?.addEventListener('click', (e) => postListView.onAddItem(e));
+        document.querySelector('#add-post')?.addEventListener('click', (e) => this.postListView.onAddItem(e));
 
         this.onChangeCallback()
     }
@@ -21,16 +21,16 @@ export default class PostController {
         }
     }
 
-    addItem(image, title, description, author) {
+    _appendPost(image, title, description, author) {
         const post = new Post(image, title, description, author);
-        this.postListModel.add(post);
+        this.postListModel.Append(post);
     }
 
-    delItem(id) {
-        this.postListModel.delete(id);
+    _removePost(id) {
+        this.postListModel.Remove(id);
     }
 
-    initOnModelChange() {
+    Run() {
         let posts = document.querySelector('#posts')
 
         if (!posts) return

@@ -1,13 +1,17 @@
+import {IdGenerator} from "../utils/IdGenerator.js";
+
 export class Post {
-    constructor(image, title, description, author) {
-        this.id = Math.round(Math.random() * 100000).toString();
+    constructor(image, title, description, author)
+    {
+        this.id = IdGenerator.GetUniqueId();
         this.image = image;
         this.title = title;
         this.description = description;
         this.author = author;
         this.postDate = getDate();
 
-        if (!this.validate()) {
+        if (!this._validate())
+        {
             alert("Error: invalid post")
             return
         }
@@ -16,8 +20,10 @@ export class Post {
         return this.initOnModelChange();
     }
 
-    validate() {
-        let tmp = {
+    _validate()
+    {
+        let tmp =
+            {
             title: !!this.title,
             description: !!this.description,
             author: !!this.author,
@@ -26,14 +32,12 @@ export class Post {
         return Object.values(tmp).every(value => value === true)
     }
 
-
-    setOnChangeCallback(onChangeCallback) {
-        this.onChangeCallback = onChangeCallback;
-    }
-
-    initOnModelChange() {
-        let handler = {
-            set: (obj, prop, val) => {
+    initOnModelChange()
+    {
+        let handler =
+            {
+            set: (obj, prop, val) =>
+            {
                 obj[prop] = val;
                 if (this.onChangeCallback) this.onChangeCallback(this);
                 return true;
@@ -43,8 +47,10 @@ export class Post {
     }
 }
 
-function getDate() {
-    return new Date().toLocaleString('en-GB', {
+function getDate()
+{
+    return new Date().toLocaleString('en-GB',
+        {
         hour12: false,
-    });
+        });
 }

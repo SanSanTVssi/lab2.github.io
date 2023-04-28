@@ -1,19 +1,9 @@
-import PostListModel from './model/PostListModel.js';
-import PostListView from './view/PostListView.js';
-import PostController from './controller/PostController.js';
-import UsersModel from "./model/UsersModel.js";
-import UsersView from "./view/UsersView.js";
-import UserController from "./controller/UserController.js";
+import {DiRegistry} from "./di/DiRegistry.js";
 
-let usersModel = new UsersModel();
-let usersView = new UsersView(usersModel);
-let usersController = new UserController(usersModel, usersView);
+const container = DiRegistry.Register();
 
-usersController.initOnModelChange()
+const customerController = container.GetInstance("customerController");
+customerController.Run();
 
-let postListModel = new PostListModel();
-let postListView = new PostListView(postListModel, usersModel);
-let controller = new PostController(postListModel, postListView);
-
-controller.initOnModelChange()
-
+const postController = container.GetInstance("postController");
+postController.Run();
