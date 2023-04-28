@@ -1,0 +1,6 @@
+.fixed-height-container img {
+    height: 350px;
+    object-fit: cover;
+    object-position: center;
+}
+
