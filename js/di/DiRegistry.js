@@ -14,7 +14,7 @@ export class DiRegistry
     {
         const container = new Container();
 
-        container.RegisterSingletonAtPlace("customersService", () => new LocalStorageService("customers"));
+        container.RegisterSingletonAtPlace("customersService", () => new CookieService("customers"));
         container.RegisterSingletonAtPlace("postsStorageService", () => new LocalStorageService("posts"));
         container.RegisterSingletonAtPlace("customerService", () => new CookieService("currentCustomer"))
 
