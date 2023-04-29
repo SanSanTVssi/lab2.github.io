@@ -3,7 +3,7 @@ import UserView from "./UserView.js";
 export default class CustomerView {
     constructor(container)
     {
-        this.customerModel = container.GetInstance("customerModel");;
+        this.customerModel = container.GetInstance("customerModel");
 
         this.controllerOnAddItem = null;
         this.controllerOnAuth = null;

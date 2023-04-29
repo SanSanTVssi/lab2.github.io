@@ -1,6 +1,7 @@
 export default class PostView {
     constructor(postModel) {
         this.postModel = postModel;
+        this.postModelJson = JSON.stringify(postModel);
     }
 
     toHtml() {
@@ -15,7 +16,7 @@ export default class PostView {
                     <p class="card-text">
                         ${this.postModel.description}
                     </p>
-                    <a href="./pages/showPost.html" onclick="ShowPost(${this.postModel.id})" class="btn btn-primary">Read more &rarr;</a>
+                    <a href="./pages/showPost.html" onclick="localStorage.setItem(\`current_post_title\`, \`${this.postModel.title}\`); localStorage.setItem(\`current_post_text\`, \`${this.postModel.body}\`); localStorage.setItem(\`current_post_img\`, \`${this.postModel.image}\`)" class="btn btn-primary">Read more &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted by <a href="#">${this.postModel.author}</a> on ${this.postModel.postDate}

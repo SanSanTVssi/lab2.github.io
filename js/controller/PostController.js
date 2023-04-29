@@ -21,8 +21,8 @@ export default class PostController {
         }
     }
 
-    _appendPost(image, title, description, author) {
-        const post = new Post(image, title, description, author);
+    _appendPost(image, title, description, author, body) {
+        const post = new Post(image, title, description, author, body);
         this.postListModel.Append(post);
     }
 

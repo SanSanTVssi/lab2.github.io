@@ -34,14 +34,18 @@ export default class PostsListView {
         const img = document.querySelector('#post-image')?.value
         const title = document.querySelector('#post-title')?.value
         const description = document.querySelector('#post-description')?.value
+        const body = document.querySelector('#post-body')?.value
 
-        this.controllerOnAddItem(img, title, description, author);
+        this.controllerOnAddItem(img, title, description, author, body);
     }
 
     toHtml() {
-        return this.postListModel.posts.map(item => {
-            const itemView = new PostView(item);
-            return itemView.toHtml();
-        }).join("");
+        return this.postListModel.posts.map
+        ( item =>
+            {
+                const itemView = new PostView(item);
+                return itemView.toHtml();
+            }
+        ).join("");
     }
 }

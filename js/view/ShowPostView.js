@@ -1,6 +1,0 @@
-export class ShowPostView
-{
-    toHtml()
-    {
-    }
-}

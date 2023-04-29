@@ -1,7 +1,7 @@
 import {IdGenerator} from "../utils/IdGenerator.js";
 
 export class Post {
-    constructor(image, title, description, author)
+    constructor(image, title, description, author, body)
     {
         this.id = IdGenerator.GetUniqueId();
         this.image = image;
@@ -9,6 +9,7 @@ export class Post {
         this.description = description;
         this.author = author;
         this.postDate = getDate();
+        this.body = body;
 
         if (!this._validate())
         {
