@@ -31,10 +31,7 @@ export default class PostController
         this.postListModel.Append(post);
     }
 
-    _removePost(id)
-    {
-        this.postListModel.Remove(id);
-    }
+    _removePost = (id) => this.postListModel.Remove(id);
 
     Run()
     {

@@ -1,7 +1,6 @@
 export default class PostView {
     constructor(postModel) {
         this.postModel = postModel;
-        this.postModelJson = JSON.stringify(postModel);
     }
 
     toHtml() {

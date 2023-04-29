@@ -5,10 +5,7 @@ export default class PostDataBaseModel
     constructor(container)
     {
         this.postsStorageService = container.GetInstance("postsStorageService");
-        let posts = JSON.parse(this.postsStorageService.GetData());
-
-        this._loadDataBase(posts)
-
+        this.posts = JSON.parse(this.postsStorageService.GetData()) ?? [];
         this.onChangeCallback = null;
     }
 
@@ -29,17 +26,5 @@ export default class PostDataBaseModel
     _save()
     {
         this.postsStorageService.AppendData(JSON.stringify(this.posts))
-    }
-
-    // This just imitation
-    _loadDataBase(posts)
-    {
-        if (!posts)
-        {
-            this.posts = JSON.parse(JSON.stringify(db));
-        } else
-        {
-            this.posts = posts
-        }
     }
 }
