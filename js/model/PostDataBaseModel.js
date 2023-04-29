@@ -17,6 +17,7 @@ export default class PostDataBaseModel
         post.onChangeCallback = this.onChangeCallback;
         this.posts.push(post);
         this._save();
+        window.location.href = "../index.html";
     }
 
     Remove(postId)

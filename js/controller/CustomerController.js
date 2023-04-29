@@ -28,7 +28,6 @@ else
     document.querySelector("#profile-link").style.display = "none";
 }
 
-// redirecting
 if (!isAuth && isProfilePage)
 {
     window.location.href = "../index.html";
@@ -82,7 +81,7 @@ export default class CustomerController
 
         this.customerModel.Append(customer);
         this.customerModel.SaveCurrentUser(customer);
-        //window.location.href = "../index.html";
+        window.location.href = "../index.html";
         return true;
     }
     _signIn(token, privateKey)
@@ -103,7 +102,7 @@ export default class CustomerController
         this.customerModel.SaveCurrentUser(customer);
 
         console.log("Authenticated");
-        //window.location.href = "../index.html";
+        window.location.href = "../index.html";
     }
 
     _logout()
