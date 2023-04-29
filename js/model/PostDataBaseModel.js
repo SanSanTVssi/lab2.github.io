@@ -1,11 +1,10 @@
-import db from "./database.json" assert {type: "json"};
-
 export default class PostDataBaseModel
 {
     constructor(container)
     {
         this.postsStorageService = container.GetInstance("postsStorageService");
         this.posts = JSON.parse(this.postsStorageService.GetData()) ?? [];
+
         this.onChangeCallback = null;
     }
 
@@ -14,7 +13,6 @@ export default class PostDataBaseModel
         post.onChangeCallback = this.onChangeCallback;
         this.posts.push(post);
         this._save();
-        window.location.href = "../index.html";
     }
 
     Remove(postId)

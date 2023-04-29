@@ -10,6 +10,7 @@ import {CookieService} from "../model/CookieService.js";
 
 export class DiRegistry
 {
+    static ContainerInstance;
     static Register()
     {
         const container = new Container();
@@ -26,6 +27,7 @@ export class DiRegistry
         container.RegisterSingleton("postListView", PostListView);
         container.RegisterSingleton("postController", PostController);
 
+        DiRegistry.ContainerInstance = container;
         return container;
     }
 }

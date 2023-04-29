@@ -64,7 +64,7 @@ export default class CustomerModel {
         try
         {
             this.currentCustomer = null;
-            this.currentCustomerService.Remove();
+            this.currentCustomerService.RemoveData();
         }
         catch (exception)
         {

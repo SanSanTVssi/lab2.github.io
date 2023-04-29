@@ -12,7 +12,7 @@ function checkCookie(name) {
     return false;
 }
 
-const isAuth = checkCookie("currentCustomer");
+const isAuth = !!localStorage.getItem("currentCustomer") || checkCookie("currentCustomer");
 
 let pageName = location.href.split("/").slice(-1).join();
 let isAuthPage = pageName === "signIn.html" || pageName === "signUp.html"
@@ -45,7 +45,7 @@ export default class CustomerController
         this.customerView = container.GetInstance("customerView");
         this.customerModel = container.GetInstance("customerModel");
 
-        this.customerModel.onChangeCallback = (e) => this.onChangeCallback(e);
+        this.customerModel.onChangeCallback = (e) => this._onChangeCallback(e);
 
         this.customerView.SetControllerOnAddItem(this._signUp);
         this.customerView.SetControllerOnAuth(this._signIn);
@@ -55,10 +55,10 @@ export default class CustomerController
         document.querySelector('#submit-sign-in')?.addEventListener('click', (e) => this.customerView.onAuth(e));
         document.querySelector('#submit-logout')?.addEventListener('click', (e) => this.customerView.onLogout(e));
 
-        this.onChangeCallback();
+        this._onChangeCallback();
     }
 
-    onChangeCallback()
+    _onChangeCallback()
     {
         let userData = document.querySelector('#user-data');
         if (userData)
@@ -107,7 +107,7 @@ export default class CustomerController
 
     _logout()
     {
-        this.customerModel.ClearCache()
+        this.customerModel.ClearCache();
         window.location.href = "../index.html";
     }
 
