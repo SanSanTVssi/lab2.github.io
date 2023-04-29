@@ -8,15 +8,12 @@ export class CookieService
 
     AppendData(data)
     {
-        const existingCookie = this.GetData();
-        if (existingCookie)
-        {
-            this.RemoveData();
-        }
-        console.log(JSON.stringify(data));
-        const cookieStr = this.cookieName + "=" + JSON.stringify(data) + "; expires=Fri, 31 Dec 2033 23:59:59 GMT; path=/;"
-        console.log(cookieStr)
-        document.cookie = cookieStr;
+        // const existingCookie = this.GetData();
+        // if (existingCookie)
+        // {
+        //     this.RemoveData();
+        // }
+        document.cookie = this.cookieName + "=" + JSON.stringify(data) + `; expires=Fri, 31 Dec ${this.expiresYear} 23:59:59 GMT; path=/;`;
     }
 
     GetData()
