@@ -1,7 +1,9 @@
 import PostView from './PostView.js';
 
-export default class PostsListView {
-    constructor(container) {
+export default class PostsListView
+{
+    constructor(container)
+    {
         this.postListModel = container.GetInstance("postListModel");
         this.customerModel = container.GetInstance("customerModel");
         this.controllerOnAddItem = null;
@@ -10,21 +12,26 @@ export default class PostsListView {
         document.querySelector('#posts')?.addEventListener('click', (e) => this._onClick(e));
     }
 
-    SetControllerOnAddItem(controllerOnAddItem) {
+    SetControllerOnAddItem(controllerOnAddItem)
+    {
         this.controllerOnAddItem = controllerOnAddItem;
     }
 
-    SetControllerOnDelItem(controllerOnDelItem) {
+    SetControllerOnDelItem(controllerOnDelItem)
+    {
         this.controllerOnDelItem = controllerOnDelItem;
     }
 
-    _onClick(e) {
-        if (e.target.className === 'del-button') {
+    _onClick(e)
+    {
+        if (e.target.className === 'del-button')
+        {
             this.controllerOnDelItem(e.target.dataset.id);
         }
     }
 
-    onAddItem(e) {
+    onAddItem(e)
+    {
         e.preventDefault()
 
         console.log(this)
@@ -39,7 +46,8 @@ export default class PostsListView {
         this.controllerOnAddItem(img, title, description, author, body);
     }
 
-    toHtml() {
+    toHtml()
+    {
         return this.postListModel.posts.map
         ( item =>
             {

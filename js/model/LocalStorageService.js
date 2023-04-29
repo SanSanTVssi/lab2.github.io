@@ -1,4 +1,4 @@
-export class StorageService
+export class LocalStorageService
 {
     constructor(key)
     {

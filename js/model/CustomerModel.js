@@ -1,12 +1,12 @@
 import {ExceptionHandleService} from "../ExceptionHandleService.js"
-import {StorageService} from "./StorageService.js";
 export default class CustomerModel {
-    constructor()
+    constructor(container)
     {
-        this.customersService = new StorageService("customers");
+        this.customersService = container.GetInstance("customersService");
+        this.currentCustomerService = container.GetInstance("customerService");
         try
         {
-            this.currentCustomer = JSON.parse(localStorage.getItem("customerData"));
+            this.currentCustomer = JSON.parse(this.currentCustomerService.GetData());
             this.customers = JSON.parse(this.customersService.GetData()) || [];
         }
         catch (exception)
@@ -64,7 +64,7 @@ export default class CustomerModel {
         try
         {
             this.currentCustomer = null;
-            localStorage.removeItem("customerData");
+            this.currentCustomerService.Remove();
         }
         catch (exception)
         {
@@ -96,7 +96,7 @@ export default class CustomerModel {
         console.log("SaveCurrentUser(customer)");
         try
         {
-            localStorage.setItem("customerData", JSON.stringify(customer));
+            this.currentCustomerService.AppendData(JSON.stringify(customer))
         }
         catch (exception)
         {

@@ -1,5 +1,3 @@
-import UserView from "./UserView.js";
-
 export default class CustomerView {
     constructor(container)
     {
@@ -58,6 +56,24 @@ export default class CustomerView {
 
     toHtml()
     {
-        return new UserView(this.customerModel.currentCustomer).toHtml();
+        const customerModel = this.customerModel.currentCustomer;
+        return `
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Gpt Name:</th>
+                        <td>${customerModel.gptName}</td>
+                    </tr>
+                    <tr>
+                        <th>Gpt Family:</th>
+                        <td>${customerModel.gptFamily}</td>
+                    </tr>
+                    <tr>
+                        <th>Personal token:</th>
+                        <td>${customerModel.token}</td>
+                    </tr>
+                </tbody>
+            </table>           
+        `;
     }
 }

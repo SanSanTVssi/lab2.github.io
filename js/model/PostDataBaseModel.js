@@ -25,7 +25,8 @@ export default class PostDataBaseModel
         this._save();
     }
 
-    _save() {
+    _save()
+    {
         this.postsStorageService.AppendData(JSON.stringify(this.posts))
     }
 

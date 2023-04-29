@@ -1,7 +1,9 @@
 import {Post} from "../model/Post.js";
 
-export default class PostController {
-    constructor(container) {
+export default class PostController
+{
+    constructor(container)
+    {
         this.postListModel = container.GetInstance("postListModel");
         this.postListView = container.GetInstance("postListView");
 
@@ -14,29 +16,36 @@ export default class PostController {
         this.onChangeCallback()
     }
 
-    onChangeCallback() {
+    onChangeCallback()
+    {
         let posts = document.querySelector('#posts')
-        if (posts) {
+        if (posts)
+        {
             posts.innerHTML = this.postListView.toHtml();
         }
     }
 
-    _appendPost(image, title, description, author, body) {
+    _appendPost(image, title, description, author, body)
+    {
         const post = new Post(image, title, description, author, body);
         this.postListModel.Append(post);
     }
 
-    _removePost(id) {
+    _removePost(id)
+    {
         this.postListModel.Remove(id);
     }
 
-    Run() {
+    Run()
+    {
         let posts = document.querySelector('#posts')
 
         if (!posts) return
 
-        let handler = {
-            set: (obj, prop, val) => {
+        let handler =
+            {
+            set: (obj, prop, val) =>
+            {
                 obj[prop] = val;
                 posts.innerHTML = this.postListView.toHtml();
                 return true;

@@ -1,29 +1,36 @@
-export class Container {
-    constructor() {
+export class Container
+{
+    constructor()
+    {
         this.registry = new Map();
     }
 
-    RegisterSingleton(name, className) {
+    RegisterSingleton(name, className)
+    {
         this.registry.set(name, {
             className,
             instance: null,
         });
     }
 
-    RegisterSingletonAtPlace(name, constructor) {
+    RegisterSingletonAtPlace(name, constructor)
+    {
         this.registry.set(name, {
             instance: constructor(),
         });
     }
 
-    GetInstance(name) {
+    GetInstance(name)
+    {
         const registration = this.registry.get(name);
 
-        if (!registration) {
+        if (!registration)
+        {
             throw new Error(`No registration found for ${name}`);
         }
 
-        if (!registration.instance) {
+        if (!registration.instance)
+        {
             registration.instance = new registration.className(this);
         }
 

@@ -1,16 +1,30 @@
 import {Customer} from "../model/CustomerModel.js"
 import {ExceptionHandleService} from "../ExceptionHandleService.js"
 
-const isAuth = !!localStorage.getItem("customerData");
+function checkCookie(name) {
+    let cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf(name + '=') === 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const isAuth = checkCookie("currentCustomer");
 
 let pageName = location.href.split("/").slice(-1).join();
 let isAuthPage = pageName === "signIn.html" || pageName === "signUp.html"
 let isProfilePage = pageName === "userProfile.html"
 
-if (isAuth) {
+if (isAuth)
+{
     document.querySelector("#sign-in-link").style.display = "none";
     document.querySelector("#sign-up-link").style.display = "none";
-} else {
+}
+else
+{
     document.querySelector("#profile-link").style.display = "none";
 }
 
@@ -27,7 +41,8 @@ if (isAuth && isAuthPage)
 
 export default class CustomerController
 {
-    constructor(container) {
+    constructor(container)
+    {
         this.customerView = container.GetInstance("customerView");
         this.customerModel = container.GetInstance("customerModel");
 
@@ -67,7 +82,7 @@ export default class CustomerController
 
         this.customerModel.Append(customer);
         this.customerModel.SaveCurrentUser(customer);
-        window.location.href = "../index.html";
+        //window.location.href = "../index.html";
         return true;
     }
     _signIn(token, privateKey)
@@ -88,7 +103,7 @@ export default class CustomerController
         this.customerModel.SaveCurrentUser(customer);
 
         console.log("Authenticated");
-        window.location.href = "../index.html";
+        //window.location.href = "../index.html";
     }
 
     _logout()
