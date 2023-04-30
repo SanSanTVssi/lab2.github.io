@@ -5,20 +5,13 @@ class MainService
 {
     Run()
     {
-        try
-        {
-            const container = DiRegistry.Register();
+        const container = DiRegistry.Register();
 
-            const customerController = container.GetInstance("customerController");
-            customerController.Run();
+        const customerController = container.GetInstance("customerController");
+        customerController.Run();
 
-            const postController = container.GetInstance("postController");
-            postController.Run();
-        }
-        catch (ex)
-        {
-            ExceptionHandleService.ShowUiException(`Fatal error while loading site: ${ex}`);
-        }
+        const postController = container.GetInstance("postController");
+        postController.Run();
     }
 }
 
