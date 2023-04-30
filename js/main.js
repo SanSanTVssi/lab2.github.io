@@ -1,9 +1,18 @@
 import {DiRegistry} from "./di/DiRegistry.js";
 
-const container = DiRegistry.Register();
+class MainService
+{
+    Run()
+    {
+        const container = DiRegistry.Register();
 
-const customerController = container.GetInstance("customerController");
-customerController.Run();
+        const customerController = container.GetInstance("customerController");
+        customerController.Run();
 
-const postController = container.GetInstance("postController");
-postController.Run();
+        const postController = container.GetInstance("postController");
+        postController.Run();
+
+    }
+}
+
+new MainService().Run();

@@ -13,12 +13,16 @@ export default class PostDataBaseModel
         post.onChangeCallback = this.onChangeCallback;
         this.posts.push(post);
         this._save();
+
+        return true;
     }
 
     Remove(postId)
     {
         this.posts.splice(this.posts.findIndex(item => item.id === postId), 1);
         this._save();
+
+        return true;
     }
 
     _save()

@@ -3,10 +3,11 @@ import CustomerModel from "../model/CustomerModel.js";
 import CustomerView from "../view/CustomerView.js";
 import CustomerController from "../controller/CustomerController.js";
 import PostDataBaseModel from "../model/PostDataBaseModel.js";
-import PostListView from "../view/PostListView.js";
+import PostListView from "../view/PostDataBaseView.js";
 import PostController from "../controller/PostController.js";
 import {LocalStorageService} from "../model/LocalStorageService.js";
 import {CookieService} from "../model/CookieService.js";
+import PostDataBaseView from "../view/PostDataBaseView.js";
 
 export class DiRegistry
 {
@@ -23,8 +24,8 @@ export class DiRegistry
         container.RegisterSingleton("customerView", CustomerView);
         container.RegisterSingleton("customerController", CustomerController);
 
-        container.RegisterSingleton("postListModel", PostDataBaseModel);
-        container.RegisterSingleton("postListView", PostListView);
+        container.RegisterSingleton("postDataBaseModel", PostDataBaseModel);
+        container.RegisterSingleton("postDataBaseView", PostDataBaseView);
         container.RegisterSingleton("postController", PostController);
 
         DiRegistry.ContainerInstance = container;

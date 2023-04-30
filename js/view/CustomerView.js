@@ -8,22 +8,7 @@ export default class CustomerView {
         this.controllerOnLogout = null;
     }
 
-    SetControllerOnAddItem(controllerOnAddItem)
-    {
-        this.controllerOnAddItem = controllerOnAddItem;
-    }
-
-    SetControllerOnAuth(controllerOnAuth)
-    {
-        this.controllerOnAuth = controllerOnAuth;
-    }
-
-    SetControllerOnLogout(controllerOnLogout)
-    {
-        this.controllerOnLogout = controllerOnLogout;
-    }
-
-    onAddItem(e)
+    OnAddItem(e)
     {
         e.preventDefault()
 
@@ -35,26 +20,24 @@ export default class CustomerView {
         const private_key = signUp["private_key"]?.value
         const repeat_private_key = signUp["repeat_private_key"]?.value
 
-        console.log("OnAddItem: ", gpt_name, gpt_family, personal_token, private_key, repeat_private_key);
-
         this.controllerOnAddItem(gpt_name, gpt_family, personal_token, private_key, repeat_private_key);
     }
 
-    onAuth(e)
+    OnAuth(e)
     {
         e.preventDefault()
         const signIn = document.querySelector('#sign-in')
         this.controllerOnAuth(signIn["personal_token"]?.value, signIn["private_key"]?.value)
     }
 
-    onLogout(e)
+    OnLogout(e)
     {
         e.preventDefault()
 
         this.controllerOnLogout()
     }
 
-    toHtml()
+    ToHtml()
     {
         const customerModel = this.customerModel.currentCustomer;
         return `

@@ -1,30 +1,19 @@
 import PostView from './PostView.js';
 
-export default class PostsListView
+export default class PostDataBaseView
 {
     constructor(container)
     {
-        this.postListModel = container.GetInstance("postListModel");
+        this.postDataBaseModel = container.GetInstance("postDataBaseModel");
         this.customerModel = container.GetInstance("customerModel");
         this.controllerOnAddItem = null;
         this.controllerOnDelItem = null;
 
-        document.querySelector('#posts')?.addEventListener('click', (e) => this._onClick(e));
+        document.querySelector('#posts')?.addEventListener('click', (e) => this._onRemovePost(e));
     }
-
-    SetControllerOnAddItem(controllerOnAddItem)
+    _onRemovePost(e)
     {
-        this.controllerOnAddItem = controllerOnAddItem;
-    }
-
-    SetControllerOnDelItem(controllerOnDelItem)
-    {
-        this.controllerOnDelItem = controllerOnDelItem;
-    }
-
-    _onClick(e)
-    {
-        if (e.target.className === 'del-button')
+        if (e.target.className.includes('del-button'))
         {
             this.controllerOnDelItem(e.target.dataset.id);
         }
@@ -46,14 +35,14 @@ export default class PostsListView
         this.controllerOnAddItem(img, title, description, author, body);
     }
 
-    toHtml()
+    ToHtml()
     {
-        return this.postListModel.posts.map
+        return this.postDataBaseModel.posts.map
         ( item =>
             {
                 const itemView = new PostView(item);
-                return itemView.toHtml();
+                return itemView.ToHtml();
             }
         ).join("");
-    }
+    }P
 }

@@ -4,14 +4,14 @@ export default class PostController
 {
     constructor(container)
     {
-        this.postListModel = container.GetInstance("postListModel");
-        this.postListView = container.GetInstance("postListView");
+        this.postDataBaseModel = container.GetInstance("postDataBaseModel");
+        this.postDataBaseView = container.GetInstance("postDataBaseView");
 
-        this.postListModel.onChangeCallback = (e) => this._onChangeCallback(e);
-        this.postListView.SetControllerOnAddItem(this._appendPost);
-        this.postListView.SetControllerOnDelItem(this._removePost);
+        this.postDataBaseModel.onChangeCallback = (e) => this._onChangeCallback(e);
+        this.postDataBaseView.controllerOnAddItem = this._appendPost;
+        this.postDataBaseView.controllerOnDelItem = this._removePost;
 
-        document.querySelector('#add-post')?.addEventListener('click', (e) => this.postListView.onAddItem(e));
+        document.querySelector('#add-post')?.addEventListener('click', (e) => this.postDataBaseView.onAddItem(e));
 
         this._onChangeCallback()
     }
@@ -21,21 +21,21 @@ export default class PostController
         let posts = document.querySelector('#posts')
         if (posts)
         {
-            posts.innerHTML = this.postListView.toHtml();
+            posts.innerHTML = this.postDataBaseView.ToHtml();
         }
     }
 
     _appendPost(image, title, description, author, body)
     {
         const post = new Post(image, title, description, author, body);
-        this.postListModel.Append(post);
+        this.postDataBaseModel.Append(post);
         localStorage.setItem("current_post_title", post.title);
         localStorage.setItem("current_post_img", post.image);
         localStorage.setItem("current_post_text", post.body);
         window.location.href = "../pages/showPost.html";
     }
 
-    _removePost = (id) => this.postListModel.Remove(id);
+    _removePost = (id) => this.postDataBaseModel.Remove(id);
 
     Run()
     {
@@ -48,11 +48,11 @@ export default class PostController
             set: (obj, prop, val) =>
             {
                 obj[prop] = val;
-                posts.innerHTML = this.postListView.toHtml();
+                posts.innerHTML = this.postDataBaseView.ToHtml();
                 return true;
             }
         }
 
-        this.postListModel.posts = new Proxy(this.postListModel.posts, handler);
+        this.postDataBaseModel.posts = new Proxy(this.postDataBaseModel.posts, handler);
     }
 }

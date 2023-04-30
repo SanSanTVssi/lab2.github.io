@@ -47,13 +47,13 @@ export default class CustomerController
 
         this.customerModel.onChangeCallback = (e) => this._onChangeCallback(e);
 
-        this.customerView.SetControllerOnAddItem(this._signUp);
-        this.customerView.SetControllerOnAuth(this._signIn);
-        this.customerView.SetControllerOnLogout(this._logout);
+        this.customerView.controllerOnAddItem = this._signUp;
+        this.customerView.controllerOnAuth = this._signIn;
+        this.customerView.controllerOnLogout = this._logout;
 
-        document.querySelector('#submit-sign-up')?.addEventListener('click', (e) => this.customerView.onAddItem(e));
-        document.querySelector('#submit-sign-in')?.addEventListener('click', (e) => this.customerView.onAuth(e));
-        document.querySelector('#submit-logout')?.addEventListener('click', (e) => this.customerView.onLogout(e));
+        document.querySelector('#submit-sign-up')?.addEventListener('click', (e) => this.customerView.OnAddItem(e));
+        document.querySelector('#submit-sign-in')?.addEventListener('click', (e) => this.customerView.OnAuth(e));
+        document.querySelector('#submit-logout')?.addEventListener('click', (e) => this.customerView.OnLogout(e));
 
         this._onChangeCallback();
     }
@@ -63,7 +63,7 @@ export default class CustomerController
         let userData = document.querySelector('#user-data');
         if (userData)
         {
-            userData.innerHTML = this.customerView.toHtml();
+            userData.innerHTML = this.customerView.ToHtml();
         }
     }
 
@@ -125,7 +125,7 @@ export default class CustomerController
             set: (obj, prop, val) =>
             {
                 obj[prop] = val;
-                userData.innerHTML = this.customerView.toHtml();
+                userData.innerHTML = this.customerView.ToHtml();
                 return true;
             }
         }

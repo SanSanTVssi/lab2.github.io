@@ -8,7 +8,7 @@ export default class PostView {
         this.removeButtonStyle = postModel.author === currentUser.gptName + " " + currentUser.gptFamily ? "" : `style="display: none"`;
     }
 
-    toHtml() {
+    ToHtml() {
         return `
             <div class="col-md-6">
             <div class="card mb-4">
@@ -21,7 +21,7 @@ export default class PostView {
                         ${this.postModel.description}
                     </p>
                     <a href="./pages/showPost.html" onclick="localStorage.setItem(\`current_post_title\`, \`${this.postModel.title}\`); localStorage.setItem(\`current_post_text\`, \`${this.postModel.body}\`); localStorage.setItem(\`current_post_img\`, \`${this.postModel.image}\`)" class="btn btn-primary">Read more &rarr;</a>
-                    <a href="./pages/showPost.html" onclick="" class="btn btn-primary" ${this.removeButtonStyle}">Remove post</a>
+                    <a href=# class="btn btn-primary del-button" ${this.removeButtonStyle}">Remove post</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted by <a href="#">${this.postModel.author}</a> on ${this.postModel.postDate}
