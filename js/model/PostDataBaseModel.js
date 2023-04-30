@@ -1,3 +1,5 @@
+import {ExceptionHandleService} from "../ExceptionHandleService.js";
+
 export default class PostDataBaseModel
 {
     constructor(container)
@@ -11,22 +13,33 @@ export default class PostDataBaseModel
     Append(post)
     {
         post.onChangeCallback = this.onChangeCallback;
-        this.posts.push(post);
-        this._save();
+        try
+        {
+            this.posts.push(post);
+            this._save();
+        }
+        catch (ex)
+        {
+            ExceptionHandleService.ShowUiException("Post creating error");
+        }
 
         return true;
     }
 
     Remove(postId)
     {
-        this.posts.splice(this.posts.findIndex(item => item.id === postId), 1);
-        this._save();
+        try
+        {
+            this.posts.splice(this.posts.findIndex(item => item.id === postId), 1);
+            this._save();
+        }
+        catch (ex)
+        {
+            ExceptionHandleService.ShowUiException("Post removing error");
+        }
 
         return true;
     }
 
-    _save()
-    {
-        this.postsStorageService.AppendData(JSON.stringify(this.posts))
-    }
+    _save = () => this.postsStorageService.AppendData(JSON.stringify(this.posts));
 }

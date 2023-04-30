@@ -11,10 +11,10 @@ export class Post {
         this.postDate = getDate();
         this.body = body;
 
-        if (!this._validate())
+        const validationErrors = this._validate();
+        if (validationErrors.length)
         {
-            alert("Error: invalid post")
-            return
+            throw new Error(`Error creating post due the errors: ${validationErrors}`);
         }
 
         this.onChangeCallback = null;
@@ -23,14 +23,24 @@ export class Post {
 
     _validate()
     {
-        let tmp =
-            {
-            title: !!this.title,
-            description: !!this.description,
-            author: !!this.author,
+        const validationErrors = [];
+
+        if (!this.title)
+        {
+            validationErrors.push('Title is required');
         }
 
-        return Object.values(tmp).every(value => value === true)
+        if (!this.description)
+        {
+            validationErrors.push('Description is required');
+        }
+
+        if (!this.author)
+        {
+            validationErrors.push('Author is required');
+        }
+
+        return validationErrors;
     }
 
     initOnModelChange()

@@ -8,12 +8,8 @@ export class CookieService
 
     AppendData(data)
     {
-        // const existingCookie = this.GetData();
-        // if (existingCookie)
-        // {
-        //     this.RemoveData();
-        // }
         document.cookie = this.cookieName + "=" + JSON.stringify(data) + `; expires=Fri, 31 Dec ${this.expiresYear} 23:59:59 GMT; path=/;`;
+        return !!this.GetData();
     }
 
     GetData()
@@ -27,5 +23,9 @@ export class CookieService
         return null;
     }
 
-    RemoveData = ()=> document.cookie = `${this.cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    RemoveData ()
+    {
+        document.cookie = `${this.cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        return !this.GetData();
+    }
 }

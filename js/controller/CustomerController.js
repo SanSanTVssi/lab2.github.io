@@ -89,13 +89,13 @@ export default class CustomerController
         const customer = this.customerModel.Find(token, "token");
         if (!customer)
         {
-            alert("Invalid personal token")
+            ExceptionHandleService.ShowUiException("Invalid personal token")
             return
         }
 
         if (!customer || customer.privateKey != privateKey )
         {
-            alert("Invalid personal private key")
+            ExceptionHandleService.ShowUiException("Invalid personal private key")
             return
         }
 

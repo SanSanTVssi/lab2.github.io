@@ -1,4 +1,5 @@
 import PostView from './PostView.js';
+import {ExceptionHandleService} from "../ExceptionHandleService.js";
 
 export default class PostDataBaseView
 {
@@ -13,9 +14,16 @@ export default class PostDataBaseView
     }
     _onRemovePost(e)
     {
-        if (e.target.className.includes('del-button'))
+        try
         {
-            this.controllerOnDelItem(e.target.dataset.id);
+            if (e.target.className.includes('del-button'))
+            {
+                this.controllerOnDelItem(e.target.dataset.id);
+            }
+        }
+        catch (ex)
+        {
+            ExceptionHandleService.ShowUiException(`Error removing post due the error: ${ex}`);
         }
     }
 
@@ -23,16 +31,22 @@ export default class PostDataBaseView
     {
         e.preventDefault()
 
-        console.log(this)
-        let user = this.customerModel.currentCustomer
-        let author = user.gptName + " " + user.gptFamily
+        try
+        {
+            let customer = this.customerModel.currentCustomer
+            let author = customer.gptName + " " + customer.gptFamily
 
-        const img = document.querySelector('#post-image')?.value
-        const title = document.querySelector('#post-title')?.value
-        const description = document.querySelector('#post-description')?.value
-        const body = document.querySelector('#post-body')?.value
+            const img = document.querySelector('#post-image')?.value
+            const title = document.querySelector('#post-title')?.value
+            const description = document.querySelector('#post-description')?.value
+            const body = document.querySelector('#post-body')?.value
 
-        this.controllerOnAddItem(img, title, description, author, body);
+            this.controllerOnAddItem(img, title, description, author, body);
+        }
+        catch (ex)
+        {
+            ExceptionHandleService.ShowUiException(`Error creating new post due the error: ${ex}`);
+        }
     }
 
     ToHtml()

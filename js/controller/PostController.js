@@ -1,4 +1,5 @@
 import {Post} from "../model/Post.js";
+import {ExceptionHandleService} from "../ExceptionHandleService.js";
 
 export default class PostController
 {
@@ -27,12 +28,19 @@ export default class PostController
 
     _appendPost(image, title, description, author, body)
     {
-        const post = new Post(image, title, description, author, body);
-        this.postDataBaseModel.Append(post);
-        localStorage.setItem("current_post_title", post.title);
-        localStorage.setItem("current_post_img", post.image);
-        localStorage.setItem("current_post_text", post.body);
-        window.location.href = "../pages/showPost.html";
+        try
+        {
+            const post = new Post(image, title, description, author, body);
+            this.postDataBaseModel.Append(post);
+            localStorage.setItem("current_post_title", post.title);
+            localStorage.setItem("current_post_img", post.image);
+            localStorage.setItem("current_post_text", post.body);
+            window.location.href = "../pages/showPost.html";
+        }
+        catch (ex)
+        {
+            ExceptionHandleService.ShowUiException(ex);
+        }
     }
 
     _removePost = (id) => this.postDataBaseModel.Remove(id);
