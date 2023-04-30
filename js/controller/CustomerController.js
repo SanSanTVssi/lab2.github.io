@@ -113,9 +113,9 @@ export default class CustomerController
 
     Run()
     {
-        let userData = document.querySelector('#user-data');
+        let customer = document.querySelector('#user-data');
 
-        if (!userData)
+        if (!customer)
         {
             return;
         }
@@ -125,7 +125,7 @@ export default class CustomerController
             set: (obj, prop, val) =>
             {
                 obj[prop] = val;
-                userData.innerHTML = this.customerView.ToHtml();
+                customer.innerHTML = this.customerView.ToHtml();
                 return true;
             }
         }
